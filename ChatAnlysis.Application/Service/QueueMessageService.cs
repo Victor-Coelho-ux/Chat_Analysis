@@ -22,7 +22,6 @@ namespace ChatAnlysis.Application.Service
         {
             if (message == null) throw new System.ArgumentNullException(nameof(message));
 
-            // Serialização simples sem Source Generation
             var options = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,

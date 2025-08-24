@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Net.Http.Json" Version="9.0.8" />
+    <PackageReference Include="VaderSharp2" Version="3.3.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ChatAnalysis.Domain\ChatAnalysis.Domain.csproj" />
     <ProjectReference Include="..\ChatAnlysis.Infrastructure\ChatAnlysis.Infrastructure.csproj" />
   </ItemGroup>
