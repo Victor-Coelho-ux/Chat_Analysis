@@ -8,9 +8,9 @@ namespace ChatAnalysis.Domain.Enum
 {
     public enum SentimentTypeEnum
     {
-        Positive,
-        Negative,
-        Neutral
+        Positive = 1,
+        Negative = 2,
+        Neutral = 3
     }
 }
     

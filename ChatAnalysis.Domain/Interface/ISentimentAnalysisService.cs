@@ -5,6 +5,6 @@ namespace ChatAnalysis.Application.Interfaces
 {
     public interface ISentimentAnalysisService
     {
-        SentimentResult Analyze(string message);
+        Task<SentimentResult> Analyze(string message, int productId);
     }
 }

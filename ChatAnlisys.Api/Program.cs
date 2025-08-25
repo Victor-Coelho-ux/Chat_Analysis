@@ -3,11 +3,13 @@ using ChatAnalysis.Domain.Interface;
 using ChatAnlysis.Application.Service;
 using ChatAnlysis.Infrastructure.Integration;
 using ChatAnlysis.Infrastructure.Interface;
+using ChatAnlysis.Infrastructure.Repositories;
 using System.Text.Json;
 using ChatAnalysis.Domain.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configuração JSON
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -17,6 +19,13 @@ builder.Services.AddControllers()
         // Usa somente o Source Generator (sem reflexão)
         options.JsonSerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
     });
+
+// Lê a connection string do appsettings.json
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// Registrar repositório do MySQL via DI
+builder.Services.AddScoped<IProductAnalysisRepository>(_ =>
+    new ProductAnalysisRepository(connectionString));
 
 // Registrar RabbitMQ Connection
 builder.Services.AddSingleton<IRabbitMQConnection>(sp =>

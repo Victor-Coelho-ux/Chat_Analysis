@@ -42,15 +42,9 @@ namespace ChatAnalysis.Infrastructure.Integration
                     var body = ea.Body.ToArray();
                     var message = Encoding.UTF8.GetString(body);
 
-                    _logger.LogInformation($"[Consumer] Mensagem recebida: {message}");
-
                     var dto = JsonSerializer.Deserialize<MessageDto>(message);
 
-                    var sentimentResult = _sentimentService.Analyze(dto.Message);
-
-                    _logger.LogInformation(
-                        $"Sentimento: {sentimentResult.Sentiment}"
-                    );
+                    _sentimentService.Analyze(dto.Message, dto.ProductId);
 
                     _channel.BasicAck(ea.DeliveryTag, multiple: false); 
                 }
