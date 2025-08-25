@@ -1,0 +1,25 @@
+BD
+CREATE DATABASE IF NOT EXISTS ChatAnalysisDB;
+
+TABLES
+CREATE TABLE Products (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE SentimentTypes (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE ProductAnalysis (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    ProductId INT NOT NULL,
+    SentimentTypeId INT NOT NULL,
+    Count INT DEFAULT 0,
+    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (ProductId) REFERENCES Products(Id),
+    FOREIGN KEY (SentimentTypeId) REFERENCES SentimentTypes(Id),
+    UNIQUE(ProductId, SentimentTypeId) -- garante 1 linha por produto + tipo
+);
